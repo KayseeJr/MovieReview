@@ -1,6 +1,7 @@
 package com.crejo.movie.review.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -94,11 +95,19 @@ public class MovieReviewManagerService implements IMovieReviewManagerService {
 		}
 
 		if (isAvg) {
-			movieList.sort(
-					Comparator.comparing(MovieResponse::getAvgScore, Comparator.nullsFirst(Comparator.naturalOrder())));
+			Collections.sort(movieList, new Comparator<MovieResponse>() {
+				@Override
+				public int compare(MovieResponse m1, MovieResponse m2) {
+					return m1.getAvgScore().compareTo(m2.getAvgScore()) > 0 ? -1 : 1;
+				}
+			});
 		} else {
-			movieList.sort(Comparator.comparing(MovieResponse::getTotalScore,
-					Comparator.nullsFirst(Comparator.naturalOrder())));
+			Collections.sort(movieList, new Comparator<MovieResponse>() {
+				@Override
+				public int compare(MovieResponse m1, MovieResponse m2) {
+					return m1.getTotalScore().compareTo(m2.getTotalScore()) > 0 ? -1 : 1;
+				}
+			});
 		}
 		if (movieList.size() == 0) {
 			return movieList;
@@ -137,7 +146,9 @@ public class MovieReviewManagerService implements IMovieReviewManagerService {
 				continue;
 			}
 		}
-
+		if (reviewList.isEmpty()) {
+			return avgReviewScore;
+		}
 		Long ratingcount = 0l;
 		for (ReviewResponse response : reviewList) {
 			avgReviewScore += response.getScore().doubleValue();

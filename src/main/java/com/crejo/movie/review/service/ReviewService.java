@@ -36,7 +36,7 @@ public class ReviewService implements IReviewService {
 		if (userEntity == null) {
 			throw new Exception("User doesn't exist");
 		}
-		
+
 		MovieEntity movieEntity = movieMap.get(movieName);
 		if (movieName == null || movieName.isEmpty()) {
 			throw new Exception("Please enter a valid movie name");
@@ -49,7 +49,7 @@ public class ReviewService implements IReviewService {
 					+ movieReviewConstants.getMaxMovieScore());
 		}
 		if (new Date().before(movieEntity.getReleaseDate())) {
-			throw new Exception("Can't review for upcoming movie");
+			throw new Exception("Movie yet to be released");
 		}
 
 		if (userMovieReviewMap.get(userName) != null && !userMovieReviewMap.get(userName).isEmpty()
@@ -104,11 +104,11 @@ public class ReviewService implements IReviewService {
 
 	private String getUserTypeByUserRatingCountunt(Long ratingCount) {
 		String userType = movieReviewConstants.getUserTypeViewer();
-		if (ratingCount <= movieReviewConstants.getViewerRatingCountThreshold()) {
+		if (ratingCount < movieReviewConstants.getViewerRatingCountThreshold()) {
 			userType = movieReviewConstants.getUserTypeViewer();
-		} else if (ratingCount <= movieReviewConstants.getCriticRatingCountThreshold()) {
+		} else if (ratingCount < movieReviewConstants.getCriticRatingCountThreshold()) {
 			userType = movieReviewConstants.getUserTypeCritic();
-		} else if (ratingCount <= movieReviewConstants.getExpertRatingCountThreshold()) {
+		} else if (ratingCount < movieReviewConstants.getExpertRatingCountThreshold()) {
 			userType = movieReviewConstants.getUserTypeExpert();
 		} else {
 			userType = movieReviewConstants.getUserTypeAdmin();
