@@ -1,5 +1,8 @@
 # MovieReviewProject
 
+This application collects the reviews for the movies from its users. Later these movie reviews are used to derive insights which helps in enriching the lives of its customers with entertainment.
+
+
 Application Functionalities:
 
 1. addUser -> Adds user to the system by taking user name as an input parameter.
