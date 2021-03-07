@@ -1,1 +1,10 @@
 /target/
+*.iml
+*.ipr
+*.iws
+*.class
+*.DS_Store
+/target
+/.idea
+.idea
+logs
