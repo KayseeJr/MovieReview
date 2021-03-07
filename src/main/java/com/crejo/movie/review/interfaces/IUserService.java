@@ -4,10 +4,9 @@ import java.util.Map;
 
 import com.crejo.movie.review.model.UserEntity;
 
-
 public interface IUserService {
 
-	public Boolean addUser(String userName) throws Exception;
+	public Boolean addUser(String userName);
 
 	public Map<String, UserEntity> getUserMap();
 

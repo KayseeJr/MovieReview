@@ -13,13 +13,7 @@ public class UserService implements IUserService {
 
 	public Map<String, UserEntity> userMap = new HashMap<>();
 
-	public Boolean addUser(String userName) throws Exception {
-		if (userName == null || userName.isEmpty()) {
-			throw new Exception("Please enter a valid username");
-		}
-		if (userMap.containsKey(userName)) {
-			throw new Exception("Username already exist");
-		}
+	public Boolean addUser(String userName) {
 		UserEntity entity = new UserEntity(userName);
 		entity.setType(movieReviewConstants.getUserTypeViewer());
 		userMap.put(userName, entity);

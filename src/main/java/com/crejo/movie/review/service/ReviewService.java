@@ -1,7 +1,6 @@
 package com.crejo.movie.review.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,30 +26,8 @@ public class ReviewService implements IReviewService {
 	public Long reviewCount = 0l;
 
 	@Override
-	public Boolean addMovieReview(String userName, String movieName, Integer rating, Map<String, UserEntity> userMap,
-			Map<String, MovieEntity> movieMap) throws Exception {
-		UserEntity userEntity = userMap.get(userName);
-		if (userName == null || userName.isEmpty()) {
-			throw new Exception("Please enter a valid username");
-		}
-		if (userEntity == null) {
-			throw new Exception("User doesn't exist");
-		}
-
-		MovieEntity movieEntity = movieMap.get(movieName);
-		if (movieName == null || movieName.isEmpty()) {
-			throw new Exception("Please enter a valid movie name");
-		}
-		if (movieEntity == null) {
-			throw new Exception("Movie doesn't exist");
-		}
-		if (rating < movieReviewConstants.getMinMovieScore() || rating > movieReviewConstants.getMaxMovieScore()) {
-			throw new Exception("Please enter a rating between " + movieReviewConstants.getMinMovieScore() + " to "
-					+ movieReviewConstants.getMaxMovieScore());
-		}
-		if (new Date().before(movieEntity.getReleaseDate())) {
-			throw new Exception("Movie yet to be released");
-		}
+	public Boolean addMovieReview(String userName, String movieName, Integer rating, UserEntity userEntity,
+			MovieEntity movieEntity) throws Exception {
 
 		if (userMovieReviewMap.get(userName) != null && !userMovieReviewMap.get(userName).isEmpty()
 				&& userMovieReviewMap.get(userName).contains(movieName)) {
