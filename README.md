@@ -1,4 +1,4 @@
-# MovieReview
+# MovieReviewProject
 
 Application Functionalities:
 
